@@ -7,9 +7,10 @@ require 'securerandom'
 
 module Quantumdmn
   class ZitadelTokenProvider
-    def initialize(key_path, issuer)
+    def initialize(key_path, issuer, project_id = nil)
       @key_data = JSON.parse(File.read(key_path))
       @issuer = issuer
+      @project_id = project_id
       @token = nil
       @expiry = Time.at(0)
     end
@@ -42,10 +43,23 @@ module Quantumdmn
       private_key = OpenSSL::PKey::RSA.new(@key_data['key'])
       jwt = JWT.encode(payload, private_key, 'RS256', { kid: @key_data['keyId'] })
 
+      # build scopes
+      scopes = [
+        'openid',
+        'profile',
+        'urn:zitadel:iam:user:resourceowner',
+        'urn:zitadel:iam:org:projects:roles'
+      ]
+      
+      # add project-specific scopes if project_id provided
+      if @project_id
+        scopes << "urn:zitadel:iam:org:project:id:#{@project_id}:aud"
+      end
+
       uri = URI("#{@issuer}/oauth/v2/token")
       res = Net::HTTP.post_form(uri, 
         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-        scope: 'openid profile urn:zitadel:iam:user:resourceowner',
+        scope: scopes.join(' '),
         assertion: jwt
       )
 

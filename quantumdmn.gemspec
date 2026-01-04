@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.summary     = "Go DMN Web API Ruby Gem"
   s.description = "API for the Go DMN Web application."
   s.license     = "MIT"
-  s.required_ruby_version = ">= 3.0"
+  s.required_ruby_version = ">= 2.7"
   s.metadata    = {}
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
 
-  s.files         = `find *`.split("\n").uniq.sort.select { |f| !f.empty? }
+  s.files         = `find *`.split("\n").uniq.sort.select { |f| !f.empty? && !f.end_with?('.gem') }
   s.test_files    = `find spec/*`.split("\n")
   s.executables   = []
   s.require_paths = ["lib"]

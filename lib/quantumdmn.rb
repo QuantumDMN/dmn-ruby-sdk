@@ -17,6 +17,10 @@ require 'quantumdmn/api_model_base'
 require 'quantumdmn/version'
 require 'quantumdmn/configuration'
 
+# custom classes
+require 'quantumdmn/zitadel_auth'
+require 'quantumdmn/dmn_engine'
+
 # Models
 require 'quantumdmn/models/add_project_member_request'
 require 'quantumdmn/models/batch_evaluate_design_request'

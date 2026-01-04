@@ -21,3 +21,11 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+quantumdmn.gemspec
+
+# custom files - don't overwrite these (quantumdmn.rb will regenerate and post-generate.sh will add custom requires)
+lib/quantumdmn/zitadel_auth.rb
+lib/quantumdmn/dmn_engine.rb
+README.md
+

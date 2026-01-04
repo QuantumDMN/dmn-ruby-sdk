@@ -11,11 +11,13 @@ All URIs are relative to *http://localhost*
 | [**create_subscription_upgrade_transaction**](DefaultApi.md#create_subscription_upgrade_transaction) | **POST** /billing/upgrade-transaction | Create Subscription Upgrade Transaction |
 | [**delete_definition**](DefaultApi.md#delete_definition) | **DELETE** /projects/{projectID}/definitions/{definitionID} | Delete Definition |
 | [**delete_project**](DefaultApi.md#delete_project) | **DELETE** /projects/{projectID} | Delete Project |
+| [**evaluate_by_xmlid**](DefaultApi.md#evaluate_by_xmlid) | **POST** /projects/{projectID}/definitions/by-xml-id/{xmlDefinitionID}/evaluate | Evaluate definition by XML definition ID |
 | [**evaluate_design**](DefaultApi.md#evaluate_design) | **POST** /evaluate/design | Evaluate DMN Design |
 | [**evaluate_design_batch**](DefaultApi.md#evaluate_design_batch) | **POST** /evaluate/design/batch | Batch evaluate a DMN design with multiple inputs |
 | [**evaluate_stored**](DefaultApi.md#evaluate_stored) | **POST** /projects/{projectID}/definitions/{definitionID}/evaluate | Evaluate Stored Definition |
 | [**get_customer_portal_session**](DefaultApi.md#get_customer_portal_session) | **GET** /subscription/portal-session | Get Customer Portal Session |
 | [**get_definition**](DefaultApi.md#get_definition) | **GET** /projects/{projectID}/definitions/{definitionID} | Get Definition |
+| [**get_definition_by_xmlid**](DefaultApi.md#get_definition_by_xmlid) | **GET** /projects/{projectID}/definitions/by-xml-id/{xmlDefinitionID} | Get definition by XML definition ID |
 | [**get_execution**](DefaultApi.md#get_execution) | **GET** /projects/{projectID}/executions/{executionID} | Get Execution |
 | [**get_frontend_config**](DefaultApi.md#get_frontend_config) | **GET** /config | Get Frontend Configuration |
 | [**get_health**](DefaultApi.md#get_health) | **GET** /health | Health Check |
@@ -483,6 +485,78 @@ No authorization required
 - **Accept**: application/json
 
 
+## evaluate_by_xmlid
+
+> <Hash<String, EvaluationResult>> evaluate_by_xmlid(project_id, xml_definition_id, evaluate_stored_request, opts)
+
+Evaluate definition by XML definition ID
+
+Evaluate a decision using XML definition ID (uses latest version unless version parameter specified)
+
+### Examples
+
+```ruby
+require 'time'
+require 'quantumdmn'
+
+api_instance = Quantumdmn::DefaultApi.new
+project_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | 
+xml_definition_id = 'xml_definition_id_example' # String | The XML definition ID from the DMN model
+evaluate_stored_request = Quantumdmn::EvaluateStoredRequest.new({context: { key: nil}}) # EvaluateStoredRequest | 
+opts = {
+  version: 56 # Integer | Specific version number (defaults to latest version)
+}
+
+begin
+  # Evaluate definition by XML definition ID
+  result = api_instance.evaluate_by_xmlid(project_id, xml_definition_id, evaluate_stored_request, opts)
+  p result
+rescue Quantumdmn::ApiError => e
+  puts "Error when calling DefaultApi->evaluate_by_xmlid: #{e}"
+end
+```
+
+#### Using the evaluate_by_xmlid_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Hash<String, EvaluationResult>>, Integer, Hash)> evaluate_by_xmlid_with_http_info(project_id, xml_definition_id, evaluate_stored_request, opts)
+
+```ruby
+begin
+  # Evaluate definition by XML definition ID
+  data, status_code, headers = api_instance.evaluate_by_xmlid_with_http_info(project_id, xml_definition_id, evaluate_stored_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Hash<String, EvaluationResult>>
+rescue Quantumdmn::ApiError => e
+  puts "Error when calling DefaultApi->evaluate_by_xmlid_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **project_id** | **String** |  |  |
+| **xml_definition_id** | **String** | The XML definition ID from the DMN model |  |
+| **evaluate_stored_request** | [**EvaluateStoredRequest**](EvaluateStoredRequest.md) |  |  |
+| **version** | **Integer** | Specific version number (defaults to latest version) | [optional] |
+
+### Return type
+
+[**Hash&lt;String, EvaluationResult&gt;**](EvaluationResult.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## evaluate_design
 
 > <Hash<String, EvaluationResult>> evaluate_design(evaluate_design_request)
@@ -783,6 +857,76 @@ end
 | ---- | ---- | ----------- | ----- |
 | **project_id** | **String** |  |  |
 | **definition_id** | **String** |  |  |
+
+### Return type
+
+[**Definition**](Definition.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_definition_by_xmlid
+
+> <Definition> get_definition_by_xmlid(project_id, xml_definition_id, opts)
+
+Get definition by XML definition ID
+
+Get the latest version of a definition by its XML definition ID, or a specific version if provided
+
+### Examples
+
+```ruby
+require 'time'
+require 'quantumdmn'
+
+api_instance = Quantumdmn::DefaultApi.new
+project_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | 
+xml_definition_id = 'xml_definition_id_example' # String | The XML definition ID from the DMN model
+opts = {
+  version: 56 # Integer | Specific version number (defaults to latest version)
+}
+
+begin
+  # Get definition by XML definition ID
+  result = api_instance.get_definition_by_xmlid(project_id, xml_definition_id, opts)
+  p result
+rescue Quantumdmn::ApiError => e
+  puts "Error when calling DefaultApi->get_definition_by_xmlid: #{e}"
+end
+```
+
+#### Using the get_definition_by_xmlid_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Definition>, Integer, Hash)> get_definition_by_xmlid_with_http_info(project_id, xml_definition_id, opts)
+
+```ruby
+begin
+  # Get definition by XML definition ID
+  data, status_code, headers = api_instance.get_definition_by_xmlid_with_http_info(project_id, xml_definition_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Definition>
+rescue Quantumdmn::ApiError => e
+  puts "Error when calling DefaultApi->get_definition_by_xmlid_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **project_id** | **String** |  |  |
+| **xml_definition_id** | **String** | The XML definition ID from the DMN model |  |
+| **version** | **Integer** | Specific version number (defaults to latest version) | [optional] |
 
 ### Return type
 

@@ -493,6 +493,89 @@ module Quantumdmn
       return data, status_code, headers
     end
 
+    # Evaluate definition by XML definition ID
+    # Evaluate a decision using XML definition ID (uses latest version unless version parameter specified)
+    # @param project_id [String] 
+    # @param xml_definition_id [String] The XML definition ID from the DMN model
+    # @param evaluate_stored_request [EvaluateStoredRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :version Specific version number (defaults to latest version)
+    # @return [Hash<String, EvaluationResult>]
+    def evaluate_by_xmlid(project_id, xml_definition_id, evaluate_stored_request, opts = {})
+      data, _status_code, _headers = evaluate_by_xmlid_with_http_info(project_id, xml_definition_id, evaluate_stored_request, opts)
+      data
+    end
+
+    # Evaluate definition by XML definition ID
+    # Evaluate a decision using XML definition ID (uses latest version unless version parameter specified)
+    # @param project_id [String] 
+    # @param xml_definition_id [String] The XML definition ID from the DMN model
+    # @param evaluate_stored_request [EvaluateStoredRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :version Specific version number (defaults to latest version)
+    # @return [Array<(Hash<String, EvaluationResult>, Integer, Hash)>] Hash<String, EvaluationResult> data, response status code and response headers
+    def evaluate_by_xmlid_with_http_info(project_id, xml_definition_id, evaluate_stored_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DefaultApi.evaluate_by_xmlid ...'
+      end
+      # verify the required parameter 'project_id' is set
+      if @api_client.config.client_side_validation && project_id.nil?
+        fail ArgumentError, "Missing the required parameter 'project_id' when calling DefaultApi.evaluate_by_xmlid"
+      end
+      # verify the required parameter 'xml_definition_id' is set
+      if @api_client.config.client_side_validation && xml_definition_id.nil?
+        fail ArgumentError, "Missing the required parameter 'xml_definition_id' when calling DefaultApi.evaluate_by_xmlid"
+      end
+      # verify the required parameter 'evaluate_stored_request' is set
+      if @api_client.config.client_side_validation && evaluate_stored_request.nil?
+        fail ArgumentError, "Missing the required parameter 'evaluate_stored_request' when calling DefaultApi.evaluate_by_xmlid"
+      end
+      # resource path
+      local_var_path = '/projects/{projectID}/definitions/by-xml-id/{xmlDefinitionID}/evaluate'.sub('{' + 'projectID' + '}', CGI.escape(project_id.to_s)).sub('{' + 'xmlDefinitionID' + '}', CGI.escape(xml_definition_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'version'] = opts[:'version'] if !opts[:'version'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(evaluate_stored_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Hash<String, EvaluationResult>'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || []
+
+      new_options = opts.merge(
+        :operation => :"DefaultApi.evaluate_by_xmlid",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DefaultApi#evaluate_by_xmlid\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Evaluate DMN Design
     # @param evaluate_design_request [EvaluateDesignRequest] 
     # @param [Hash] opts the optional parameters
@@ -823,6 +906,78 @@ module Quantumdmn
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: DefaultApi#get_definition\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get definition by XML definition ID
+    # Get the latest version of a definition by its XML definition ID, or a specific version if provided
+    # @param project_id [String] 
+    # @param xml_definition_id [String] The XML definition ID from the DMN model
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :version Specific version number (defaults to latest version)
+    # @return [Definition]
+    def get_definition_by_xmlid(project_id, xml_definition_id, opts = {})
+      data, _status_code, _headers = get_definition_by_xmlid_with_http_info(project_id, xml_definition_id, opts)
+      data
+    end
+
+    # Get definition by XML definition ID
+    # Get the latest version of a definition by its XML definition ID, or a specific version if provided
+    # @param project_id [String] 
+    # @param xml_definition_id [String] The XML definition ID from the DMN model
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :version Specific version number (defaults to latest version)
+    # @return [Array<(Definition, Integer, Hash)>] Definition data, response status code and response headers
+    def get_definition_by_xmlid_with_http_info(project_id, xml_definition_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DefaultApi.get_definition_by_xmlid ...'
+      end
+      # verify the required parameter 'project_id' is set
+      if @api_client.config.client_side_validation && project_id.nil?
+        fail ArgumentError, "Missing the required parameter 'project_id' when calling DefaultApi.get_definition_by_xmlid"
+      end
+      # verify the required parameter 'xml_definition_id' is set
+      if @api_client.config.client_side_validation && xml_definition_id.nil?
+        fail ArgumentError, "Missing the required parameter 'xml_definition_id' when calling DefaultApi.get_definition_by_xmlid"
+      end
+      # resource path
+      local_var_path = '/projects/{projectID}/definitions/by-xml-id/{xmlDefinitionID}'.sub('{' + 'projectID' + '}', CGI.escape(project_id.to_s)).sub('{' + 'xmlDefinitionID' + '}', CGI.escape(xml_definition_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'version'] = opts[:'version'] if !opts[:'version'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Definition'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || []
+
+      new_options = opts.merge(
+        :operation => :"DefaultApi.get_definition_by_xmlid",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DefaultApi#get_definition_by_xmlid\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
