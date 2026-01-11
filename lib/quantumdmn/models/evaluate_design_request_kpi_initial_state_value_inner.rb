@@ -14,22 +14,17 @@ require 'date'
 require 'time'
 
 module Quantumdmn
-  class OverviewResponseStats < ApiModelBase
-    attr_accessor :total_credits
+  class EvaluateDesignRequestKpiInitialStateValueInner < ApiModelBase
+    attr_accessor :metrics
 
-    attr_accessor :requests_trend
-
-    attr_accessor :credits_trend
-
-    attr_accessor :kpi_trends
+    # Timestamp of the measurement (ISO 8601)
+    attr_accessor :timestamp
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'total_credits' => :'totalCredits',
-        :'requests_trend' => :'requestsTrend',
-        :'credits_trend' => :'creditsTrend',
-        :'kpi_trends' => :'kpiTrends'
+        :'metrics' => :'metrics',
+        :'timestamp' => :'timestamp'
       }
     end
 
@@ -46,10 +41,8 @@ module Quantumdmn
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'total_credits' => :'Integer',
-        :'requests_trend' => :'Array<DailyStat>',
-        :'credits_trend' => :'Array<DailyStat>',
-        :'kpi_trends' => :'Array<KpiTrend>'
+        :'metrics' => :'Array<EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner>',
+        :'timestamp' => :'Time'
       }
     end
 
@@ -63,38 +56,30 @@ module Quantumdmn
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Quantumdmn::OverviewResponseStats` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Quantumdmn::EvaluateDesignRequestKpiInitialStateValueInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Quantumdmn::OverviewResponseStats`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Quantumdmn::EvaluateDesignRequestKpiInitialStateValueInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'total_credits')
-        self.total_credits = attributes[:'total_credits']
+      if attributes.key?(:'metrics')
+        if (value = attributes[:'metrics']).is_a?(Array)
+          self.metrics = value
+        end
+      else
+        self.metrics = nil
       end
 
-      if attributes.key?(:'requests_trend')
-        if (value = attributes[:'requests_trend']).is_a?(Array)
-          self.requests_trend = value
-        end
-      end
-
-      if attributes.key?(:'credits_trend')
-        if (value = attributes[:'credits_trend']).is_a?(Array)
-          self.credits_trend = value
-        end
-      end
-
-      if attributes.key?(:'kpi_trends')
-        if (value = attributes[:'kpi_trends']).is_a?(Array)
-          self.kpi_trends = value
-        end
+      if attributes.key?(:'timestamp')
+        self.timestamp = attributes[:'timestamp']
+      else
+        self.timestamp = nil
       end
     end
 
@@ -103,6 +88,14 @@ module Quantumdmn
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @metrics.nil?
+        invalid_properties.push('invalid value for "metrics", metrics cannot be nil.')
+      end
+
+      if @timestamp.nil?
+        invalid_properties.push('invalid value for "timestamp", timestamp cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -110,7 +103,29 @@ module Quantumdmn
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @metrics.nil?
+      return false if @timestamp.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] metrics Value to be assigned
+    def metrics=(metrics)
+      if metrics.nil?
+        fail ArgumentError, 'metrics cannot be nil'
+      end
+
+      @metrics = metrics
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] timestamp Value to be assigned
+    def timestamp=(timestamp)
+      if timestamp.nil?
+        fail ArgumentError, 'timestamp cannot be nil'
+      end
+
+      @timestamp = timestamp
     end
 
     # Checks equality by comparing each attribute.
@@ -118,10 +133,8 @@ module Quantumdmn
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          total_credits == o.total_credits &&
-          requests_trend == o.requests_trend &&
-          credits_trend == o.credits_trend &&
-          kpi_trends == o.kpi_trends
+          metrics == o.metrics &&
+          timestamp == o.timestamp
     end
 
     # @see the `==` method
@@ -133,7 +146,7 @@ module Quantumdmn
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total_credits, requests_trend, credits_trend, kpi_trends].hash
+      [metrics, timestamp].hash
     end
 
     # Builds the object from hash

@@ -19,10 +19,13 @@ module Quantumdmn
 
     attr_accessor :context
 
-    # List of Decision Services to evaluate
+    # Optional identifier for the business object being processed. If provided, existing metrics for this businessId and XML Definition ID will be replaced.
+    attr_accessor :business_id
+
+    # Names of the Decision Services to evaluate (optional)
     attr_accessor :decision_services
 
-    # List of Decision or Decision Service names to evaluate
+    # List of Decision or Decision Service names to evaluate (optional)
     attr_accessor :decisions
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -30,6 +33,7 @@ module Quantumdmn
       {
         :'version' => :'version',
         :'context' => :'context',
+        :'business_id' => :'businessId',
         :'decision_services' => :'decisionServices',
         :'decisions' => :'decisions'
       }
@@ -50,6 +54,7 @@ module Quantumdmn
       {
         :'version' => :'Integer',
         :'context' => :'Hash<String, FeelValue>',
+        :'business_id' => :'String',
         :'decision_services' => :'Array<String>',
         :'decisions' => :'Array<String>'
       }
@@ -87,6 +92,10 @@ module Quantumdmn
         end
       else
         self.context = nil
+      end
+
+      if attributes.key?(:'business_id')
+        self.business_id = attributes[:'business_id']
       end
 
       if attributes.key?(:'decision_services')
@@ -139,6 +148,7 @@ module Quantumdmn
       self.class == o.class &&
           version == o.version &&
           context == o.context &&
+          business_id == o.business_id &&
           decision_services == o.decision_services &&
           decisions == o.decisions
     end
@@ -152,7 +162,7 @@ module Quantumdmn
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [version, context, decision_services, decisions].hash
+      [version, context, business_id, decision_services, decisions].hash
     end
 
     # Builds the object from hash

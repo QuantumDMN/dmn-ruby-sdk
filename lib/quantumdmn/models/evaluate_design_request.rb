@@ -25,13 +25,17 @@ module Quantumdmn
     # List of Decision or Decision Service names to evaluate (optional)
     attr_accessor :decisions
 
+    # Initial state for windowed KPIs (KPI ID -> array of timestamped values)
+    attr_accessor :kpi_initial_state
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'xml' => :'xml',
         :'context' => :'context',
         :'decision_services' => :'decisionServices',
-        :'decisions' => :'decisions'
+        :'decisions' => :'decisions',
+        :'kpi_initial_state' => :'kpiInitialState'
       }
     end
 
@@ -51,7 +55,8 @@ module Quantumdmn
         :'xml' => :'String',
         :'context' => :'Hash<String, FeelValue>',
         :'decision_services' => :'Array<String>',
-        :'decisions' => :'Array<String>'
+        :'decisions' => :'Array<String>',
+        :'kpi_initial_state' => :'Hash<String, Array<EvaluateDesignRequestKpiInitialStateValueInner>>'
       }
     end
 
@@ -100,6 +105,12 @@ module Quantumdmn
           self.decisions = value
         end
       end
+
+      if attributes.key?(:'kpi_initial_state')
+        if (value = attributes[:'kpi_initial_state']).is_a?(Hash)
+          self.kpi_initial_state = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -140,7 +151,8 @@ module Quantumdmn
           xml == o.xml &&
           context == o.context &&
           decision_services == o.decision_services &&
-          decisions == o.decisions
+          decisions == o.decisions &&
+          kpi_initial_state == o.kpi_initial_state
     end
 
     # @see the `==` method
@@ -152,7 +164,7 @@ module Quantumdmn
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [xml, context, decision_services, decisions].hash
+      [xml, context, decision_services, decisions, kpi_initial_state].hash
     end
 
     # Builds the object from hash
