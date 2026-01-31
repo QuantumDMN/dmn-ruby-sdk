@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 
 =begin
-#Go DMN Web API
+#QuantumDMN Ruby SDK
 
-#API for the Go DMN Web application.
+#API for the QuantumDMN platform.
 
 The version of the OpenAPI document: 1.0.0
 
@@ -16,14 +16,14 @@ $:.push File.expand_path("../lib", __FILE__)
 require "quantumdmn/version"
 
 Gem::Specification.new do |s|
-  s.name        = "quantumdmn"
+  s.name        = "quantumdmn-sdk"
   s.version     = Quantumdmn::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["OpenAPI-Generator"]
-  s.email       = [""]
-  s.homepage    = "https://openapi-generator.tech"
-  s.summary     = "Go DMN Web API Ruby Gem"
-  s.description = "API for the Go DMN Web application."
+  s.authors     = ["QuantumDMN"]
+  s.email       = ["support@quantumdmn.com"]
+  s.homepage    = "https://quantumdmn.com"
+  s.summary     = "QuantumDMN Ruby SDK"
+  s.description = "API for the QuantumDMN platform."
   s.license     = "MIT"
   s.required_ruby_version = ">= 2.7"
   s.metadata    = {}

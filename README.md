@@ -7,20 +7,20 @@ Ruby client library for the [QuantumDMN](https://quantumdmn.com) decision engine
 Add to your Gemfile:
 
 ```ruby
-gem 'quantumdmn'
+gem 'quantumdmn-sdk'
 ```
 
 Or install directly:
 
 ```bash
-gem install quantumdmn
+gem install quantumdmn-sdk
 ```
 
 Or build from source:
 
 ```bash
 gem build quantumdmn.gemspec
-gem install ./quantumdmn-1.0.0.gem
+gem install ./quantumdmn-sdk-1.0.0.gem
 ```
 
 ## Features

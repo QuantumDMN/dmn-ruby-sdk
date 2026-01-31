@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **xml** | **String** |  |  |
+| **additional_xmls** | **Array&lt;String&gt;** |  | [optional] |
 | **context** | [**Hash&lt;String, FeelValue&gt;**](FeelValue.md) |  | [optional] |
 | **decision_services** | **Array&lt;String&gt;** | Names of the Decision Services to evaluate (optional) | [optional] |
 | **decisions** | **Array&lt;String&gt;** | List of Decision or Decision Service names to evaluate (optional) | [optional] |
@@ -17,6 +18,7 @@ require 'quantumdmn'
 
 instance = Quantumdmn::EvaluateDesignRequest.new(
   xml: null,
+  additional_xmls: null,
   context: null,
   decision_services: null,
   decisions: null,

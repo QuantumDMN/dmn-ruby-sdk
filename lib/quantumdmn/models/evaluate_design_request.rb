@@ -17,6 +17,8 @@ module Quantumdmn
   class EvaluateDesignRequest < ApiModelBase
     attr_accessor :xml
 
+    attr_accessor :additional_xmls
+
     attr_accessor :context
 
     # Names of the Decision Services to evaluate (optional)
@@ -32,6 +34,7 @@ module Quantumdmn
     def self.attribute_map
       {
         :'xml' => :'xml',
+        :'additional_xmls' => :'additionalXmls',
         :'context' => :'context',
         :'decision_services' => :'decisionServices',
         :'decisions' => :'decisions',
@@ -53,6 +56,7 @@ module Quantumdmn
     def self.openapi_types
       {
         :'xml' => :'String',
+        :'additional_xmls' => :'Array<String>',
         :'context' => :'Hash<String, FeelValue>',
         :'decision_services' => :'Array<String>',
         :'decisions' => :'Array<String>',
@@ -86,6 +90,12 @@ module Quantumdmn
         self.xml = attributes[:'xml']
       else
         self.xml = nil
+      end
+
+      if attributes.key?(:'additional_xmls')
+        if (value = attributes[:'additional_xmls']).is_a?(Array)
+          self.additional_xmls = value
+        end
       end
 
       if attributes.key?(:'context')
@@ -149,6 +159,7 @@ module Quantumdmn
       return true if self.equal?(o)
       self.class == o.class &&
           xml == o.xml &&
+          additional_xmls == o.additional_xmls &&
           context == o.context &&
           decision_services == o.decision_services &&
           decisions == o.decisions &&
@@ -164,7 +175,7 @@ module Quantumdmn
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [xml, context, decision_services, decisions, kpi_initial_state].hash
+      [xml, additional_xmls, context, decision_services, decisions, kpi_initial_state].hash
     end
 
     # Builds the object from hash
