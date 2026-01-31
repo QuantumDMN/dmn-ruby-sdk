@@ -13,22 +13,15 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
           bundler-cache: true
+          ruby-version: ruby
 
-      - name: Run tests
-        run: bundle exec rspec
-
-      - name: Build gem
-        run: gem build quantumdmn.gemspec
-
-      - name: Setup RubyGems Credentials
-        uses: rubygems/configure-rubygems-credentials@v1
-
-      - name: Publish to RubyGems
-        run: gem push quantumdmn-sdk-*.gem
+      # Release
+      - uses: rubygems/release-gem@v1
