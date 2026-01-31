@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'jwt', '~> 2.7'
+  s.add_runtime_dependency 'ostruct'
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
 
